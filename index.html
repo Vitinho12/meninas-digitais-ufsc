@@ -25,8 +25,6 @@
     <div class="wrap bar">
       <a class="logo" href="#inicio" aria-label="Meninas Digitais UFSC, início">
         <img src="img/logo-meninas-digitais-ufsc.png" alt="Meninas Digitais UFSC" class="logo-md">
-        <span class="logo-sep" aria-hidden="true"></span>
-        <img src="img/logo-ufsc.png" alt="UFSC" class="logo-ufsc">
       </a>
       <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">&#9776;</button>
       <nav id="menu" aria-label="Navegação principal">
@@ -178,13 +176,29 @@ nome = <span class="s">"você"</span>
       </div>
     </section>
 
-    <!-- PATROCINADORES -->
+    <!-- PATROCINADORES E PARCEIROS -->
     <section class="sponsors" id="patrocinadores">
       <div class="wrap">
-        <h2>Patrocinadores e parceiros</h2>
-        <!-- Troque cada <div class="logo-ph"> por: <img src="logo.png" alt="Nome do parceiro"> (altura 64px já definida no CSS) -->
-        <div class="strip">
-          <div class="logo-ph">Logo 1</div><div class="logo-ph">Logo 2</div><div class="logo-ph">Logo 3</div><div class="logo-ph">Logo 4</div><div class="logo-ph">Logo 5</div>
+        <span class="tag">&lt;apoio /&gt;</span>
+        <h2>Apoio e Parceiros</h2>
+        <p class="lead sponsors-lead">Instituições e iniciativas parceiras que apoiam e fortalecem as ações do Meninas Digitais UFSC.</p>
+
+        <!-- Grade de logos dos parceiros (fácil manutenção: para adicionar um parceiro novo, basta duplicar um bloco <div class="partner-card">) -->
+        <div class="partners-grid">
+          <!-- Parceiro 1: Meninas Digitais Nacional -->
+          <div class="partner-card" title="Programa Meninas Digitais - Sociedade Brasileira de Computação (SBC)">
+            <img src="img/parceiro-meninas-digitais.png" alt="Programa Meninas Digitais SBC" class="partner-logo">
+          </div>
+
+          <!-- Parceiro 2: CNPq -->
+          <div class="partner-card" title="CNPq - Conselho Nacional de Desenvolvimento Científico e Tecnológico">
+            <img src="img/parceiro-cnpq.png" alt="CNPq" class="partner-logo">
+          </div>
+
+          <!-- Parceiro 3: RENACEE_MD -->
+          <div class="partner-card" title="RENACEE_MD - Rede Nacional de Educação e Extensão Meninas Digitais">
+            <img src="img/parceiro-renacee.png" alt="RENACEE Meninas Digitais" class="partner-logo">
+          </div>
         </div>
       </div>
     </section>
