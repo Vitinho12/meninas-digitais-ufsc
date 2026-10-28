@@ -28,12 +28,7 @@
         <img src="img/logo-meninas-digitais-ufsc.png" alt="Meninas Digitais UFSC" class="logo-md">
       </a>
 
-      <!-- Seletor de idioma -->
-      <div class="lang-switcher" role="group" aria-label="Selecionar idioma">
-        <button class="lang-btn active" data-lang="pt" aria-pressed="true"  title="Português">🇧🇷</button>
-        <button class="lang-btn"        data-lang="en" aria-pressed="false" title="English">🇺🇸</button>
-        <button class="lang-btn"        data-lang="es" aria-pressed="false" title="Español">🇪🇸</button>
-      </div>
+      <!-- Seletor de idioma (removido do topo, agora está no menu abaixo) -->
 
       <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">&#9776;</button>
       <nav id="menu" aria-label="Navegação principal">
@@ -45,6 +40,17 @@
           <li><a href="#premios"        data-i18n="nav.premios">Prêmios</a></li>
           <li><a href="#contato"        data-i18n="nav.contato">Contato</a></li>
           <li><a href="#patrocinadores" data-i18n="nav.patrocinadores">Patrocinadores</a></li>
+          <li class="lang-nav-item" role="group" aria-label="Selecionar idioma">
+            <button class="lang-btn active" data-lang="pt" aria-pressed="true"  title="Português">
+              <img src="https://flagcdn.com/br.svg" alt="Português" class="flag-img">
+            </button>
+            <button class="lang-btn"        data-lang="en" aria-pressed="false" title="English">
+              <img src="https://flagcdn.com/us.svg" alt="English" class="flag-img">
+            </button>
+            <button class="lang-btn"        data-lang="es" aria-pressed="false" title="Español">
+              <img src="https://flagcdn.com/es.svg" alt="Español" class="flag-img">
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
