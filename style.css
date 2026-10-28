@@ -211,46 +211,33 @@ header.top {
 }
 
 .logo-md {
-  height: 42px;
+  height: 44px;
   width: auto;
   display: block;
 }
 
 .logo-sep {
   width: 1px;
-  height: 28px;
+  height: 30px;
   background: rgba(255, 255, 255, .35);
   display: inline-block;
 }
 
-.logo-ufsc-wrap {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  padding: 3px 6px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
-}
-
 .logo-ufsc {
-  height: 36px;
+  height: 42px;
   width: auto;
   display: block;
 }
 
 @media (max-width: 600px) {
   .logo-md {
-    height: 32px;
+    height: 34px;
   }
   .logo-ufsc {
-    height: 28px;
-  }
-  .logo-ufsc-wrap {
-    padding: 2px 5px;
+    height: 32px;
   }
   .logo-sep {
-    height: 20px;
+    height: 22px;
   }
 }
 
