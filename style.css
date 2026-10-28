@@ -195,32 +195,63 @@ header.top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 68px;
+  height: 72px;
 }
 
 .logo {
-  color: #fff;
-  font-family: var(--head);
-  font-weight: 700;
   text-decoration: none;
-  font-size: 1.15rem;
   display: flex;
   align-items: center;
-  gap: .6rem;
+  gap: .85rem;
+  transition: opacity .15s ease;
 }
 
-.logo i {
-  display: inline-grid;
-  place-items: center;
-  width: 36px;
+.logo:hover {
+  opacity: .92;
+}
+
+.logo-md {
+  height: 42px;
+  width: auto;
+  display: block;
+}
+
+.logo-sep {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, .35);
+  display: inline-block;
+}
+
+.logo-ufsc-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  padding: 3px 6px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+}
+
+.logo-ufsc {
   height: 36px;
-  border-radius: 10px;
-  background: var(--sun);
-  color: var(--ink);
-  font-style: normal;
-  font-family: Consolas, monospace;
-  font-size: .9rem;
-  font-weight: 700;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .logo-md {
+    height: 32px;
+  }
+  .logo-ufsc {
+    height: 28px;
+  }
+  .logo-ufsc-wrap {
+    padding: 2px 5px;
+  }
+  .logo-sep {
+    height: 20px;
+  }
 }
 
 nav ul {
@@ -333,18 +364,22 @@ nav a.active {
 }
 
 .hero h1 {
-  font-size: clamp(2.5rem, 8vw, 4.4rem);
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
   font-weight: 700;
-  max-width: 14ch;
+  line-height: 1.15;
+  max-width: 22ch;
+  text-wrap: balance;
+  margin: 0 0 1.25rem;
 }
 
 mark {
   background: var(--sun);
   color: var(--ink);
-  padding: 0 .2em;
+  padding: 0 .25em;
   border-radius: 12px;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+  white-space: nowrap;
 }
 
 .hero p {
