@@ -7,7 +7,7 @@
 (() => {
   // 1. CARREGAMENTO E FILTRO DAS PUBLICAÇÕES
   const pubsData = typeof PUBLICACOES !== 'undefined' ? PUBLICACOES : [];
-  const labelMap = { artigo: 'Artigo', estudo: 'Estudo', video: 'Vídeo' };
+  const labelMap = { artigo: 'Artigo', estudo: 'Estudo', video: 'Vídeo', relatorio: 'Relatório' };
   const box = document.getElementById('pubs');
   const emptyMessage = document.getElementById('pubs-empty');
 
