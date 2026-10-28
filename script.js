@@ -5,9 +5,69 @@
  */
 
 (() => {
-  // 1. CARREGAMENTO E FILTRO DAS PUBLICAÇÕES
+
+  // ============================================================
+  // 1. SISTEMA DE IDIOMAS
+  // ============================================================
+  const LANG_KEY = 'md-ufsc-lang';
+  let currentLang = localStorage.getItem(LANG_KEY) || 'pt';
+
+  const t = (key) => {
+    if (typeof TRADUCOES === 'undefined') return '';
+    const entry = TRADUCOES[key];
+    if (!entry) return '';
+    return entry[currentLang] || entry['pt'] || '';
+  };
+
+  const applyTranslations = () => {
+    document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : currentLang;
+
+    // Traduz todos os elementos com data-i18n
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      const translation = t(key);
+      if (translation) el.textContent = translation;
+    });
+
+    // Atualiza os botões de filtro aria-label
+    const filterGroup = document.querySelector('.filters[aria-label]');
+    if (filterGroup) {
+      filterGroup.setAttribute('aria-label',
+        currentLang === 'pt' ? 'Filtrar publicações' :
+        currentLang === 'en' ? 'Filter publications' :
+        'Filtrar publicaciones'
+      );
+    }
+
+    // Atualiza botões do switcher
+    document.querySelectorAll('.lang-btn').forEach((btn) => {
+      const isActive = btn.getAttribute('data-lang') === currentLang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    // Re-renderiza publicações com labels no idioma certo
+    renderPublications(activeFilter());
+  };
+
+  const activeFilter = () => {
+    const pressed = document.querySelector('.filters button[aria-pressed="true"]');
+    return pressed ? pressed.getAttribute('data-f') : 'todos';
+  };
+
+  // Botões de idioma
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      currentLang = btn.getAttribute('data-lang');
+      localStorage.setItem(LANG_KEY, currentLang);
+      applyTranslations();
+    });
+  });
+
+  // ============================================================
+  // 2. CARREGAMENTO E FILTRO DAS PUBLICAÇÕES
+  // ============================================================
   const pubsData = typeof PUBLICACOES !== 'undefined' ? PUBLICACOES : [];
-  const labelMap = { artigo: 'Artigo', estudo: 'Estudo', video: 'Vídeo', relatorio: 'Relatório' };
   const box = document.getElementById('pubs');
   const emptyMessage = document.getElementById('pubs-empty');
 
@@ -20,7 +80,8 @@
   };
 
   // Cria botão de link ou download
-  const createButton = (label, url, className = '', isDownload = false) => {
+  const createButton = (labelKey, url, className = '', isDownload = false) => {
+    const label = t(labelKey) || labelKey;
     const btn = createElement('a', `btn small ${className}`.trim(), label);
     if (url) {
       btn.href = url;
@@ -33,7 +94,7 @@
     } else {
       btn.href = '#publicacoes';
       btn.setAttribute('aria-disabled', 'true');
-      btn.title = 'Ainda não disponível';
+      btn.title = t('pubs.empty') || 'Ainda não disponível';
       btn.addEventListener('click', (e) => e.preventDefault());
     }
     return btn;
@@ -50,9 +111,11 @@
       count++;
 
       const isVideo = item.tipo === 'video';
-      const card = createElement('article', `card pub ${isVideo ? 'video' : ''}`.trim());
+      const isRelatorio = item.tipo === 'relatorio';
+      const card = createElement('article', `card pub ${isVideo ? 'video' : ''} ${isRelatorio ? 'relatorio' : ''}`.trim());
 
-      card.appendChild(createElement('span', 'badge', labelMap[item.tipo] || 'Publicação'));
+      const labelKey = `pubs.label.${item.tipo}`;
+      card.appendChild(createElement('span', 'badge', t(labelKey) || item.tipo));
       card.appendChild(createElement('h3', '', item.titulo));
       card.appendChild(createElement('p', 'meta', item.meta));
 
@@ -62,10 +125,10 @@
 
       const buttonsContainer = createElement('div', 'btns');
       if (isVideo) {
-        buttonsContainer.appendChild(createButton('Assistir no YouTube', item.link));
+        buttonsContainer.appendChild(createButton('pubs.btn.assistir', item.link));
       } else {
-        buttonsContainer.appendChild(createButton('Ler', item.link, 'ghost'));
-        buttonsContainer.appendChild(createButton('Baixar PDF', item.pdf, '', true));
+        buttonsContainer.appendChild(createButton('pubs.btn.ler', item.link, 'ghost'));
+        buttonsContainer.appendChild(createButton('pubs.btn.pdf', item.pdf, '', true));
       }
 
       card.appendChild(buttonsContainer);
@@ -86,10 +149,9 @@
     });
   });
 
-  // Renderização inicial com todas as publicações
-  renderPublications('todos');
-
-  // 2. MENU MOBILE (HAMBÚRGUER)
+  // ============================================================
+  // 3. MENU MOBILE (HAMBÚRGUER)
+  // ============================================================
   const burger = document.getElementById('burger');
   const menu = document.getElementById('menu');
 
@@ -97,7 +159,9 @@
     const setMenuState = (isOpen) => {
       menu.classList.toggle('open', isOpen);
       burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      burger.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+      burger.setAttribute('aria-label', isOpen
+        ? (currentLang === 'pt' ? 'Fechar menu' : currentLang === 'en' ? 'Close menu' : 'Cerrar menú')
+        : (currentLang === 'pt' ? 'Abrir menu' : currentLang === 'en' ? 'Open menu' : 'Abrir menú'));
       burger.innerHTML = isOpen ? '&times;' : '&#9776;';
     };
 
@@ -105,18 +169,18 @@
       setMenuState(!menu.classList.contains('open'));
     });
 
-    // Fecha o menu ao clicar em qualquer link
     menu.addEventListener('click', (e) => {
       if (e.target.tagName === 'A') setMenuState(false);
     });
 
-    // Fecha o menu ao pressionar a tecla Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') setMenuState(false);
     });
   }
 
-  // 3. DESTAQUE AUTOMÁTICO DO MENU CONFORME A ROLAGEM
+  // ============================================================
+  // 4. DESTAQUE AUTOMÁTICO DO MENU CONFORME A ROLAGEM
+  // ============================================================
   const menuLinks = menu ? Array.from(menu.querySelectorAll('a')) : [];
   if ('IntersectionObserver' in window && menuLinks.length > 0) {
     const observer = new IntersectionObserver(
@@ -124,8 +188,7 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             menuLinks.forEach((link) => {
-              const matchesSection = link.getAttribute('href') === `#${entry.target.id}`;
-              link.classList.toggle('active', matchesSection);
+              link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
             });
           }
         });
@@ -133,18 +196,19 @@
       { rootMargin: '-45% 0px -50% 0px' }
     );
 
-    const sectionIds = ['acoes', 'publicacoes', 'sobre', 'participar', 'premios', 'contato', 'patrocinadores'];
-    sectionIds.forEach((id) => {
+    ['acoes', 'publicacoes', 'sobre', 'participar', 'premios', 'contato', 'patrocinadores'].forEach((id) => {
       const sectionElement = document.getElementById(id);
       if (sectionElement) observer.observe(sectionElement);
     });
   }
 
-  // 4. FORMULÁRIO DE CONTATO E VALIDAÇÃO
+  // ============================================================
+  // 5. FORMULÁRIO DE CONTATO E VALIDAÇÃO
+  // ============================================================
   /*
     INTEGRAÇÃO DO FORMULÁRIO (futuro):
     Cole em ENDPOINT a URL de um destes serviços:
-    1) Google Apps Script (Aplicativo da Web) que grava em uma planilha;
+    1) Google Apps Script que grava em uma planilha;
     2) Formspree: "https://formspree.io/f/SEU_ID".
     Enquanto ENDPOINT estiver vazio, o envio é simulado localmente.
   */
@@ -153,11 +217,11 @@
   const status = document.getElementById('status');
 
   const validationRules = {
-    nome: ['e-nome', 'Informe seu nome.'],
-    email: ['e-email', 'Informe um e-mail válido.'],
-    perfil: ['e-perfil', 'Escolha um perfil.'],
-    mensagem: ['e-msg', 'Escreva sua mensagem.'],
-    consentimento: ['e-consent', 'Marque a caixa para concordar.']
+    nome:          ['e-nome',    'contato.err.nome'],
+    email:         ['e-email',   'contato.err.email'],
+    perfil:        ['e-perfil',  'contato.err.perfil'],
+    mensagem:      ['e-msg',     'contato.err.msg'],
+    consentimento: ['e-consent', 'contato.err.consent']
   };
 
   const validateForm = () => {
@@ -166,6 +230,7 @@
     Object.keys(validationRules).forEach((fieldKey) => {
       const field = form.elements[fieldKey];
       const errorBox = document.getElementById(validationRules[fieldKey][0]);
+      const msgKey = validationRules[fieldKey][1];
       const value = field ? field.value.trim() : '';
 
       const isCheckbox = field.type === 'checkbox';
@@ -175,7 +240,7 @@
         : !value || (isEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
 
       if (errorBox) {
-        errorBox.textContent = isInvalid ? validationRules[fieldKey][1] : '';
+        errorBox.textContent = isInvalid ? t(msgKey) : '';
       }
       field.setAttribute('aria-invalid', isInvalid ? 'true' : 'false');
 
@@ -198,7 +263,7 @@
 
       const showSuccess = () => {
         status.className = 'status ok';
-        status.textContent = 'Mensagem enviada! Entraremos em contato em breve.';
+        status.textContent = t('contato.ok');
         form.reset();
       };
 
@@ -216,8 +281,14 @@
         showSuccess();
       } catch (err) {
         status.className = 'status fail';
-        status.textContent = 'Não foi possível enviar. Tente novamente ou escreva para o e-mail do rodapé.';
+        status.textContent = t('contato.fail');
       }
     });
   }
+
+  // ============================================================
+  // INICIALIZAÇÃO: aplica o idioma salvo ao carregar a página
+  // ============================================================
+  applyTranslations();
+
 })();

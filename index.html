@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Meninas Digitais UFSC</title>
   <meta name="description" content="Projeto de extensão da UFSC, parceiro do programa Meninas Digitais da SBC. Oficinas e atividades para meninas que querem conhecer a computação.">
-  
+
   <!-- Otimização de carregamento de fontes (preconnect) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap">
-  
+
   <!-- Estilos principais -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Scripts (carregamento em paralelo não-bloqueante com defer) -->
+  <!-- Scripts (defer = não bloqueia a renderização da página) -->
+  <script src="traducoes.js" defer></script>
   <script src="publicacoes.js" defer></script>
   <script src="script.js" defer></script>
 </head>
@@ -26,16 +27,24 @@
       <a class="logo" href="#inicio" aria-label="Meninas Digitais UFSC, início">
         <img src="img/logo-meninas-digitais-ufsc.png" alt="Meninas Digitais UFSC" class="logo-md">
       </a>
+
+      <!-- Seletor de idioma -->
+      <div class="lang-switcher" role="group" aria-label="Selecionar idioma">
+        <button class="lang-btn active" data-lang="pt" aria-pressed="true"  title="Português">🇧🇷</button>
+        <button class="lang-btn"        data-lang="en" aria-pressed="false" title="English">🇺🇸</button>
+        <button class="lang-btn"        data-lang="es" aria-pressed="false" title="Español">🇪🇸</button>
+      </div>
+
       <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">&#9776;</button>
       <nav id="menu" aria-label="Navegação principal">
         <ul>
-          <li><a href="#acoes">Ações</a></li>
-          <li><a href="#publicacoes">Publicações</a></li>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#participar">Participar</a></li>
-          <li><a href="#premios">Prêmios</a></li>
-          <li><a href="#contato">Contato</a></li>
-          <li><a href="#patrocinadores">Patrocinadores</a></li>
+          <li><a href="#acoes"          data-i18n="nav.acoes">Ações</a></li>
+          <li><a href="#publicacoes"    data-i18n="nav.publicacoes">Publicações</a></li>
+          <li><a href="#sobre"          data-i18n="nav.sobre">Sobre</a></li>
+          <li><a href="#participar"     data-i18n="nav.participar">Participar</a></li>
+          <li><a href="#premios"        data-i18n="nav.premios">Prêmios</a></li>
+          <li><a href="#contato"        data-i18n="nav.contato">Contato</a></li>
+          <li><a href="#patrocinadores" data-i18n="nav.patrocinadores">Patrocinadores</a></li>
         </ul>
       </nav>
     </div>
@@ -46,11 +55,14 @@
     <section class="hero" id="inicio">
       <div class="wrap">
         <div>
-          <h1>O mundo da tecnologia também é <mark>o seu lugar</mark>.</h1>
-          <p>O Meninas Digitais UFSC leva oficinas, desafios e conversas sobre tecnologia para meninas que querem descobrir o que dá para criar com computação.</p>
+          <h1>
+            <span data-i18n="hero.h1.before">O mundo da tecnologia também é</span>
+            <mark data-i18n="hero.h1.mark">o seu lugar</mark><span data-i18n="hero.h1.after">.</span>
+          </h1>
+          <p data-i18n="hero.p">O Meninas Digitais UFSC leva oficinas, desafios e conversas sobre tecnologia para meninas que querem descobrir o que dá para criar com computação.</p>
           <div class="btns">
-            <a class="btn" href="#contato">Quero participar</a>
-            <a class="btn ghost" href="#acoes">Conheça nossas ações</a>
+            <a class="btn" href="#contato"  data-i18n="hero.btn.participar">Quero participar</a>
+            <a class="btn ghost" href="#acoes" data-i18n="hero.btn.acoes">Conheça nossas ações</a>
           </div>
         </div>
         <!-- Elemento decorativo. Pode ser trocado por uma foto real das oficinas (com autorização de uso de imagem). -->
@@ -59,7 +71,7 @@
           <pre><span class="c"># seu primeiro programa</span>
 nome = <span class="s">"você"</span>
 <span class="k">print</span>(<span class="s">"Oi, mundo! Eu sou "</span> + nome)</pre>
-          <div class="sticker">Sem experiência? Sem problema!</div>
+          <div class="sticker" data-i18n="hero.sticker">Sem experiência? Sem problema!</div>
         </div>
       </div>
     </section>
@@ -67,9 +79,9 @@ nome = <span class="s">"você"</span>
     <!-- AÇÕES (INSTAGRAM) -->
     <section id="acoes">
       <div class="wrap">
-        <span class="tag">&lt;ações /&gt;</span>
-        <h2>Nossas Ações</h2>
-        <p class="lead">Veja o que andamos fazendo. Os posts do nosso Instagram aparecem aqui e se renovam sempre que algo novo é publicado.</p>
+        <span class="tag" data-i18n="acoes.tag">&lt;ações /&gt;</span>
+        <h2 data-i18n="acoes.h2">Nossas Ações</h2>
+        <p class="lead" data-i18n="acoes.lead">Veja o que andamos fazendo. Os posts do nosso Instagram aparecem aqui e se renovam sempre que algo novo é publicado.</p>
 
         <!--
           INTEGRAÇÃO INSTAGRAM (futuro):
@@ -78,34 +90,34 @@ nome = <span class="s">"você"</span>
              <script src="https://elfsightcdn.com/platform.js" async></script>
              <div class="elfsight-app-XXXXXXXX" data-elfsight-app-lazy></div>
         -->
-        <div class="widget-slot">Espaço reservado para o widget do Instagram. Os blocos abaixo são apenas ilustrativos.</div>
+        <div class="widget-slot" data-i18n="acoes.widget">Espaço reservado para o widget do Instagram. Os blocos abaixo são apenas ilustrativos.</div>
         <div class="insta">
-          <a class="tile t1" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Oficina de programação, ver no Instagram"><small>@meninasdigitaisufsc</small>Oficina de programação</a>
-          <a class="tile t2" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Visita à escola, ver no Instagram"><small>@meninasdigitaisufsc</small>Visita à escola</a>
-          <a class="tile t3" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Roda de conversa, ver no Instagram"><small>@meninasdigitaisufsc</small>Roda de conversa</a>
-          <a class="tile t4" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Robótica, ver no Instagram"><small>@meninasdigitaisufsc</small>Robótica na prática</a>
-          <a class="tile t5" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Mentoria, ver no Instagram"><small>@meninasdigitaisufsc</small>Mentoria com egressas</a>
-          <a class="tile t6" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Semana de computação, ver no Instagram"><small>@meninasdigitaisufsc</small>Semana de computação</a>
+          <a class="tile t1" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Oficina de programação, ver no Instagram"><small>@meninasdigitaisufsc</small><span data-i18n="acoes.tile1">Oficina de programação</span></a>
+          <a class="tile t2" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Visita à escola, ver no Instagram"><small>@meninasdigitaisufsc</small><span data-i18n="acoes.tile2">Visita à escola</span></a>
+          <a class="tile t3" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Roda de conversa, ver no Instagram"><small>@meninasdigitaisufsc</small><span data-i18n="acoes.tile3">Roda de conversa</span></a>
+          <a class="tile t4" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Robótica, ver no Instagram"><small>@meninasdigitaisufsc</small><span data-i18n="acoes.tile4">Robótica na prática</span></a>
+          <a class="tile t5" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Mentoria, ver no Instagram"><small>@meninasdigitaisufsc</small><span data-i18n="acoes.tile5">Mentoria com egressas</span></a>
+          <a class="tile t6" href="https://www.instagram.com/meninasdigitaisufsc" aria-label="Semana de computação, ver no Instagram"><small>@meninasdigitaisufsc</small><span data-i18n="acoes.tile6">Semana de computação</span></a>
         </div>
-        <a class="btn" href="https://www.instagram.com/meninasdigitaisufsc" target="_blank" rel="noopener">Seguir @meninasdigitaisufsc</a>
+        <a class="btn" href="https://www.instagram.com/meninasdigitaisufsc" target="_blank" rel="noopener" data-i18n="acoes.btn">Seguir @meninasdigitaisufsc</a>
       </div>
     </section>
 
     <!-- PUBLICAÇÕES -->
     <section class="tint" id="publicacoes">
       <div class="wrap">
-        <span class="tag">&lt;publicações /&gt;</span>
-        <h2>Publicações</h2>
-        <p class="lead">Artigos, estudos e vídeos produzidos pelo projeto. Abra para ler ou assistir, e baixe o PDF quando estiver disponível.</p>
+        <span class="tag" data-i18n="pubs.tag">&lt;publicações /&gt;</span>
+        <h2 data-i18n="pubs.h2">Publicações</h2>
+        <p class="lead" data-i18n="pubs.lead">Artigos, estudos e vídeos produzidos pelo projeto. Abra para ler ou assistir, e baixe o PDF quando estiver disponível.</p>
         <div class="filters" role="group" aria-label="Filtrar publicações">
-          <button type="button" data-f="todos" aria-pressed="true">Todas</button>
-          <button type="button" data-f="artigo" aria-pressed="false">Artigos</button>
-          <button type="button" data-f="estudo" aria-pressed="false">Estudos</button>
-          <button type="button" data-f="relatorio" aria-pressed="false">Relatórios</button>
-          <button type="button" data-f="video" aria-pressed="false">Vídeos</button>
+          <button type="button" data-f="todos"     aria-pressed="true"  data-i18n="pubs.filter.todos">Todas</button>
+          <button type="button" data-f="artigo"    aria-pressed="false" data-i18n="pubs.filter.artigo">Artigos</button>
+          <button type="button" data-f="estudo"    aria-pressed="false" data-i18n="pubs.filter.estudo">Estudos</button>
+          <button type="button" data-f="relatorio" aria-pressed="false" data-i18n="pubs.filter.relatorio">Relatórios</button>
+          <button type="button" data-f="video"     aria-pressed="false" data-i18n="pubs.filter.video">Vídeos</button>
         </div>
         <div class="pubs" id="pubs" aria-live="polite"></div>
-        <p class="empty" id="pubs-empty">Nenhuma publicação nesta categoria ainda.</p>
+        <p class="empty" id="pubs-empty" data-i18n="pubs.empty">Nenhuma publicação nesta categoria ainda.</p>
       </div>
     </section>
 
@@ -113,14 +125,20 @@ nome = <span class="s">"você"</span>
     <section id="sobre">
       <div class="wrap about-grid">
         <div>
-          <span class="tag">&lt;sobre /&gt;</span>
-          <h2>Quem somos</h2>
-          <p class="lead">Somos um projeto de extensão da Universidade Federal de Santa Catarina. Estudantes, professoras e voluntárias se juntam para mostrar a meninas da educação básica que a computação também é lugar delas.</p>
-          <p class="lead">Fazemos parte do programa Meninas Digitais da Sociedade Brasileira de Computação, uma rede de projetos de todo o Brasil com o mesmo objetivo: mais mulheres na tecnologia.</p>
+          <span class="tag" data-i18n="sobre.tag">&lt;sobre /&gt;</span>
+          <h2 data-i18n="sobre.h2">Quem somos</h2>
+          <p class="lead" data-i18n="sobre.p1">Somos um projeto de extensão da Universidade Federal de Santa Catarina. Estudantes, professoras e voluntárias se juntam para mostrar a meninas da educação básica que a computação também é lugar delas.</p>
+          <p class="lead" data-i18n="sobre.p2">Fazemos parte do programa Meninas Digitais da Sociedade Brasileira de Computação, uma rede de projetos de todo o Brasil com o mesmo objetivo: mais mulheres na tecnologia.</p>
         </div>
         <div class="partners">
-          <div class="card partner"><h3>UFSC</h3><p>Oficinas, mentorias e eventos feitos por quem estuda e trabalha com computação na universidade.</p></div>
-          <div class="card partner"><h3>SBC</h3><p>Rede nacional que reúne projetos parceiros e valoriza as ações de cada um.</p></div>
+          <div class="card partner">
+            <h3 data-i18n="sobre.card1.h3">UFSC</h3>
+            <p data-i18n="sobre.card1.p">Oficinas, mentorias e eventos feitos por quem estuda e trabalha com computação na universidade.</p>
+          </div>
+          <div class="card partner">
+            <h3 data-i18n="sobre.card2.h3">SBC</h3>
+            <p data-i18n="sobre.card2.p">Rede nacional que reúne projetos parceiros e valoriza as ações de cada um.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -128,13 +146,22 @@ nome = <span class="s">"você"</span>
     <!-- COMO PARTICIPAR -->
     <section class="dark" id="participar">
       <div class="wrap">
-        <span class="tag">&lt;participar /&gt;</span>
-        <h2>Como participar</h2>
-        <p class="lead">É simples, e você pode começar hoje.</p>
+        <span class="tag" data-i18n="participar.tag">&lt;participar /&gt;</span>
+        <h2 data-i18n="participar.h2">Como participar</h2>
+        <p class="lead" data-i18n="participar.lead">É simples, e você pode começar hoje.</p>
         <ol class="steps">
-          <li><h3>Conheça as ações</h3><p>Veja nossos posts e descubra o que acontece nas oficinas e eventos.</p></li>
-          <li><h3>Fale com a gente</h3><p>Preencha o formulário, escolhendo o perfil que combina com você.</p></li>
-          <li><h3>Participe</h3><p>Entramos em contato para contar as próximas atividades e como se inscrever.</p></li>
+          <li>
+            <h3 data-i18n="participar.s1.h3">Conheça as ações</h3>
+            <p data-i18n="participar.s1.p">Veja nossos posts e descubra o que acontece nas oficinas e eventos.</p>
+          </li>
+          <li>
+            <h3 data-i18n="participar.s2.h3">Fale com a gente</h3>
+            <p data-i18n="participar.s2.p">Preencha o formulário, escolhendo o perfil que combina com você.</p>
+          </li>
+          <li>
+            <h3 data-i18n="participar.s3.h3">Participe</h3>
+            <p data-i18n="participar.s3.p">Entramos em contato para contar as próximas atividades e como se inscrever.</p>
+          </li>
         </ol>
       </div>
     </section>
@@ -142,14 +169,14 @@ nome = <span class="s">"você"</span>
     <!-- PRÊMIOS -->
     <section class="awards-sec" id="premios">
       <div class="wrap">
-        <span class="tag">&lt;reconhecimentos /&gt;</span>
-        <h2>Reconhecimentos</h2>
+        <span class="tag" data-i18n="premios.tag">&lt;reconhecimentos /&gt;</span>
+        <h2 data-i18n="premios.h2">Reconhecimentos</h2>
         <ul class="awards">
-          <li class="card"><span class="year">2023</span><div><strong>Prêmio Destaque UFSC</strong><small>Extensão universitária</small></div></li>
-          <li class="card"><span class="year">2022</span><div><strong>Menção Honrosa Meninas Digitais</strong><small>Sociedade Brasileira de Computação</small></div></li>
-          <li class="card"><span class="year">2021</span><div><strong>Destaque em Inclusão e Diversidade</strong><small>Evento regional de computação</small></div></li>
+          <li class="card"><span class="year">2023</span><div><strong data-i18n="premios.a1.titulo">Prêmio Destaque UFSC</strong><small data-i18n="premios.a1.sub">Extensão universitária</small></div></li>
+          <li class="card"><span class="year">2022</span><div><strong data-i18n="premios.a2.titulo">Menção Honrosa Meninas Digitais</strong><small data-i18n="premios.a2.sub">Sociedade Brasileira de Computação</small></div></li>
+          <li class="card"><span class="year">2021</span><div><strong data-i18n="premios.a3.titulo">Destaque em Inclusão e Diversidade</strong><small data-i18n="premios.a3.sub">Evento regional de computação</small></div></li>
         </ul>
-        <p class="lead awards-note">Dados de exemplo: trocar pelos reais.</p>
+        <p class="lead awards-note" data-i18n="premios.nota">Dados de exemplo: trocar pelos reais.</p>
       </div>
     </section>
 
@@ -157,21 +184,52 @@ nome = <span class="s">"você"</span>
     <section class="contact" id="contato">
       <div class="wrap contact-grid">
         <div>
-          <span class="tag tag-sun">&lt;contato /&gt;</span>
-          <h2>Fale com a gente</h2>
-          <p class="lead">Quer participar das oficinas, receber o projeto na sua escola, ser voluntária ou apoiar? Conte um pouco sobre você e respondemos por e-mail.</p>
+          <span class="tag tag-sun" data-i18n="contato.tag">&lt;contato /&gt;</span>
+          <h2 data-i18n="contato.h2">Fale com a gente</h2>
+          <p class="lead" data-i18n="contato.lead">Quer participar das oficinas, receber o projeto na sua escola, ser voluntária ou apoiar? Conte um pouco sobre você e respondemos por e-mail.</p>
         </div>
         <form id="form" class="card" novalidate>
-          <div><label for="nome">Nome</label><input id="nome" name="nome" type="text" autocomplete="name" required><div class="err" id="e-nome"></div></div>
-          <div><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required><div class="err" id="e-email"></div></div>
-          <div><label for="perfil">Perfil</label>
+          <div>
+            <label for="nome" data-i18n="contato.nome">Nome</label>
+            <input id="nome" name="nome" type="text" autocomplete="name" required>
+            <div class="err" id="e-nome"></div>
+          </div>
+          <div>
+            <label for="email" data-i18n="contato.email">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+            <div class="err" id="e-email"></div>
+          </div>
+          <div>
+            <label for="perfil" data-i18n="contato.perfil">Perfil</label>
             <select id="perfil" name="perfil" required>
-              <option value="">Selecione</option><option>Estudante</option><option>Escola ou professora</option><option>Voluntária</option><option>Patrocinador</option>
-            </select><div class="err" id="e-perfil"></div></div>
-          <div><label for="local">Cidade ou escola <span class="opt">(opcional)</span></label><input id="local" name="cidade_escola" type="text"></div>
-          <div><label for="msg">Mensagem</label><textarea id="msg" name="mensagem" required></textarea><div class="err" id="e-msg"></div></div>
-          <div><label class="check" for="consent"><input id="consent" name="consentimento" type="checkbox" required><span>Concordo que o projeto use estes dados apenas para responder meu contato. Se eu for menor de idade, tenho ciência de um responsável.</span></label><div class="err" id="e-consent"></div></div>
-          <button class="btn" type="submit">Enviar mensagem</button>
+              <option value="" data-i18n="contato.perfil.sel">Selecione</option>
+              <option data-i18n="contato.perfil.o1">Estudante</option>
+              <option data-i18n="contato.perfil.o2">Escola ou professora</option>
+              <option data-i18n="contato.perfil.o3">Voluntária</option>
+              <option data-i18n="contato.perfil.o4">Patrocinador</option>
+            </select>
+            <div class="err" id="e-perfil"></div>
+          </div>
+          <div>
+            <label for="local">
+              <span data-i18n="contato.local">Cidade ou escola</span>
+              <span class="opt" data-i18n="contato.local.opt">(opcional)</span>
+            </label>
+            <input id="local" name="cidade_escola" type="text">
+          </div>
+          <div>
+            <label for="msg" data-i18n="contato.msg">Mensagem</label>
+            <textarea id="msg" name="mensagem" required></textarea>
+            <div class="err" id="e-msg"></div>
+          </div>
+          <div>
+            <label class="check" for="consent">
+              <input id="consent" name="consentimento" type="checkbox" required>
+              <span data-i18n="contato.consent">Concordo que o projeto use estes dados apenas para responder meu contato. Se eu for menor de idade, tenho ciência de um responsável.</span>
+            </label>
+            <div class="err" id="e-consent"></div>
+          </div>
+          <button class="btn" type="submit" data-i18n="contato.btn">Enviar mensagem</button>
           <div class="status" id="status" role="status" aria-live="polite"></div>
         </form>
       </div>
@@ -180,9 +238,9 @@ nome = <span class="s">"você"</span>
     <!-- PATROCINADORES E PARCEIROS -->
     <section class="sponsors" id="patrocinadores">
       <div class="wrap">
-        <span class="tag">&lt;apoio /&gt;</span>
-        <h2>Apoio e Parceiros</h2>
-        <p class="lead sponsors-lead">Instituições e iniciativas parceiras que apoiam e fortalecem as ações do Meninas Digitais UFSC.</p>
+        <span class="tag" data-i18n="apoio.tag">&lt;apoio /&gt;</span>
+        <h2 data-i18n="apoio.h2">Apoio e Parceiros</h2>
+        <p class="lead sponsors-lead" data-i18n="apoio.lead">Instituições e iniciativas parceiras que apoiam e fortalecem as ações do Meninas Digitais UFSC.</p>
 
         <!-- Grade de logos dos parceiros (fácil manutenção: para adicionar um parceiro novo, basta duplicar um bloco <div class="partner-card">) -->
         <div class="partners-grid">
@@ -208,14 +266,25 @@ nome = <span class="s">"você"</span>
   <footer>
     <div class="wrap">
       <div class="foot">
-        <div><h3>Meninas Digitais UFSC</h3><p>Projeto de extensão da Universidade Federal de Santa Catarina, parceiro do programa Meninas Digitais da SBC.</p></div>
-        <div><h3>Links úteis</h3><ul>
-          <li><a href="https://www.ufsc.br" target="_blank" rel="noopener">UFSC</a></li>
-          <li><a href="https://meninas.sbc.org.br" target="_blank" rel="noopener">Programa Meninas Digitais (SBC)</a></li>
-          <li><a href="#participar">Como participar</a></li></ul></div>
-        <div><h3>Contato</h3><ul>
-          <li><a href="mailto:meninasdigitais@contato.ufsc.br">meninasdigitais@contato.ufsc.br</a></li>
-          <li><a href="https://www.instagram.com/meninasdigitaisufsc" target="_blank" rel="noopener">@meninasdigitaisufsc</a></li></ul></div>
+        <div>
+          <h3>Meninas Digitais UFSC</h3>
+          <p data-i18n="footer.sobre">Projeto de extensão da Universidade Federal de Santa Catarina, parceiro do programa Meninas Digitais da SBC.</p>
+        </div>
+        <div>
+          <h3 data-i18n="footer.links">Links úteis</h3>
+          <ul>
+            <li><a href="https://www.ufsc.br" target="_blank" rel="noopener">UFSC</a></li>
+            <li><a href="https://meninas.sbc.org.br" target="_blank" rel="noopener">Programa Meninas Digitais (SBC)</a></li>
+            <li><a href="#participar" data-i18n="footer.link.participar">Como participar</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="footer.contato">Contato</h3>
+          <ul>
+            <li><a href="mailto:meninasdigitais@contato.ufsc.br">meninasdigitais@contato.ufsc.br</a></li>
+            <li><a href="https://www.instagram.com/meninasdigitaisufsc" target="_blank" rel="noopener">@meninasdigitaisufsc</a></li>
+          </ul>
+        </div>
       </div>
       <div class="copy">&copy; 2026 Meninas Digitais UFSC. Florianópolis, SC. (E-mail de exemplo: trocar pelo oficial.)</div>
     </div>
